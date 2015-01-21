@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html ng-app="quoteBook">
+<head>
+  <title>Quote Book</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body ng-controller="MainCtrl">
+
+  <button ng-click="showAddAQuote = !showAddAQuote">Add A Quote</button>
+  <button ng-click="showRemoveQuote = !showRemoveQuote">Remove A Quote</button>
+  <button ng-click="showAuthorInput = !showAuthorInput">Filter by Author</button>
+
+  <div id="addModal" ng-show="showAddAQuote">
+
+    <input type="text" ng-model="addQuoteText" class="quoteTextInput" placeholder="Type your Quote here">
+    <input type="text" ng-model="addQuoteAuthor" class="quoteTextInput" placeholder="Author Is...."><br>
+    <button type="submit" ng-click="addNewQuote()">Add New Quote</button>
+
+  </div>
+
+
+  <div id="removeModal" ng-show="showRemoveQuote">
+    <input type="text" ng-model="quoteToRemove" class=""><br>
+    <button type="submit" ng-click="removeThisQuote()">Remove this Quote</button>
+
+  </div>
+
+  <div id="searchByAuthorModal" ng-show="showAuthorInput">
+    <input type="text" ng-model="authorSearch" class="" placeholder="Search Author..." >
+
+
+  </div>
+
+
+  <div ng-repeat="quote in quotes | filter: {author: authorSearch}" class="quote_container">
+    <p>{{ quote.text }}</p>
+    <p class="author">{{ quote.author }}</p>
+
+  </div>
+
+
+
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.28/angular.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.28/angular-cookies.js"></script>
+  <script src="app.js"></script>
+  <script src="mainCtrl.js"></script>
+  <script src="dataService.js"></script>
+</body>
+</html>
